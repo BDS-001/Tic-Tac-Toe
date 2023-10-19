@@ -23,13 +23,13 @@ const game = (function () {
     //cacheDom
     const boardSections = document.querySelectorAll('.game-square')
 
+    _render()
+
     //render function
-    function render() {
+    function _render() {
         for (let index = 0; index < gameBoard.board.length; index++) {
             boardSections[index].innerHTML = gameBoard.board[index]
         }
     }
-
-    //initialize
-    render()
+    
 })();
