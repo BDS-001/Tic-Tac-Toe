@@ -1,3 +1,25 @@
+:root {
+    --border: 10px solid black;
+    --board-size: 400px;
+}
+
 body {
     background-color: green;
+}
+
+#gameboard {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    border: var(--border);
+    height: var(--board-size);
+    width: var(--board-size);
+}
+
+.game-square {
+    background-color: pink;
+    border: var(--border);
+    border-collapse: separate;
 }
