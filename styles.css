@@ -22,6 +22,6 @@ body {
     background-color: pink;
     border: var(--border);
     border-collapse: separate;
-    font-size: 6em;
+    font-size: 5em;
     text-align: center;
 }
