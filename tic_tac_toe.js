@@ -1,17 +1,35 @@
-function GameBoard() {
-    this.board = [['','',''],['','',''],['','','']]
-}
+//gameBoard module
+const gameBoard = (function() {
+    const board = ['x','o','z','q','w','e','y','u','i']
 
-function Player(selectedGamePiece) {
-    let gamePiece = selectedGamePiece
-    this.setGamePiece = function(newGamePiece) {
-        gamePiece = newGamePiece
-    },
-    this.getGamePiece = function() {
-        return gamePiece
+    const changeBoard = function(index, val) {
+        board[index] = val
+    }
+
+    return {board, changeBoard}
+})();
+
+//create player factory
+function createPlayer(gamePiece) {
+
+    return {
+        gamePiece
     }
 }
 
+// game module
 const game = (function () {
     
+    //cacheDom
+    const boardSections = document.querySelectorAll('.game-square')
+
+    //render function
+    function render() {
+        for (let index = 0; index < gameBoard.board.length; index++) {
+            boardSections[index].innerHTML = gameBoard.board[index]
+        }
+    }
+
+    //initialize
+    render()
 })();

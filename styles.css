@@ -22,4 +22,8 @@ body {
     background-color: pink;
     border: var(--border);
     border-collapse: separate;
+    font-size: 6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
