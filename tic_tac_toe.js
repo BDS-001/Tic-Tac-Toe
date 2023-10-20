@@ -8,20 +8,51 @@ const gameBoard = (function() {
         }
     }
 
-    return {board, changeBoard}
+    const checkBoard = function(gamePiece) {
+        return _checkRows(gamePiece) || _checkColumns(gamePiece)
+    }
+
+    const _checkRows = function(gamePiece) {
+        const first = 0
+        const second = 1
+        const third = 2
+
+        for (let i = 0; i < 9; i+=3) {
+            if (board[first + i] === gamePiece && board[second + i] === gamePiece && board[third + i] === gamePiece) {
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    const _checkColumns = function(gamePiece) {
+        const first = 0
+        const second = 3
+        const third = 6
+
+        for (let i = 0; i <= 3; i++) {
+            if (board[first + i] === gamePiece && board[second + i] === gamePiece && board[third + i] === gamePiece) {
+                return true
+            }
+        }
+        return false
+    }
+
+    return {board, changeBoard, checkBoard}
 })();
 
 //create player factory
-function createPlayer(gamePiece) {
+function createPlayer(name, gamePiece) {
 
     return {
-        gamePiece
+        name, gamePiece
     }
 }
 
 // game module
 const game = (function () {
-    const players = [createPlayer('X'), createPlayer('O')]
+    const players = [createPlayer('one','X'), createPlayer('two','O')]
     let currentPlayer = 0
     
     //cacheDom
@@ -34,7 +65,7 @@ const game = (function () {
 
     _render()
 
-    //render function
+    //render to html
     function _render() {
         for (let index = 0; index < gameBoard.board.length; index++) {
             boardSections[index].innerHTML = gameBoard.board[index]
@@ -44,9 +75,14 @@ const game = (function () {
     function placeGamePiece(event) {
         if (event.target.innerHTML === '') {
             gameBoard.changeBoard(event.target.dataset.index, players[currentPlayer].gamePiece)
-            currentPlayer = (currentPlayer === 1) ? 0 : 1
             _render()
+            console.log(gameBoard.checkBoard(players[currentPlayer].gamePiece))
+            currentPlayer = (currentPlayer === 1) ? 0 : 1
         }
+    }
+
+    function gameState() {
+
     }
     
 })();
