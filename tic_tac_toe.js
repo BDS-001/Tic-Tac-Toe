@@ -8,38 +8,42 @@ const gameBoard = (function() {
         }
     }
 
-    const checkBoard = function(gamePiece) {
-        return _checkRows(gamePiece) || _checkColumns(gamePiece)
+    const checkVictory = function(gamePiece) {
+        return _checkRows(gamePiece) || _checkColumns(gamePiece) || _checkDiag(gamePiece)
     }
 
     const _checkRows = function(gamePiece) {
-        const first = 0
-        const second = 1
-        const third = 2
-
         for (let i = 0; i < 9; i+=3) {
-            if (board[first + i] === gamePiece && board[second + i] === gamePiece && board[third + i] === gamePiece) {
+            if (board[0 + i] === gamePiece && board[1 + i] === gamePiece && board[2 + i] === gamePiece) {
                 return true
             }
         }
-        
         return false
     }
 
     const _checkColumns = function(gamePiece) {
-        const first = 0
-        const second = 3
-        const third = 6
-
         for (let i = 0; i <= 3; i++) {
-            if (board[first + i] === gamePiece && board[second + i] === gamePiece && board[third + i] === gamePiece) {
+            if (board[0 + i] === gamePiece && board[3 + i] === gamePiece && board[6 + i] === gamePiece) {
                 return true
             }
         }
         return false
     }
 
-    return {board, changeBoard, checkBoard}
+    const _checkDiag = function(gamePiece) {
+        if (board[0] === gamePiece && board[4] === gamePiece && board[8] === gamePiece) return true
+        if (board[2] === gamePiece && board[4] === gamePiece && board[6] === gamePiece) return true
+        return false
+    }
+
+    const checkTie = function() {
+        for (let index = 0; index < board.length; index++) {
+            if (board[index] != '') return false
+        }
+        return true
+    }
+
+    return {board, changeBoard, checkVictory, checkTie}
 })();
 
 //create player factory
@@ -76,7 +80,7 @@ const game = (function () {
         if (event.target.innerHTML === '') {
             gameBoard.changeBoard(event.target.dataset.index, players[currentPlayer].gamePiece)
             _render()
-            console.log(gameBoard.checkBoard(players[currentPlayer].gamePiece))
+            console.log(gameBoard.checkVictory(players[currentPlayer].gamePiece))
             currentPlayer = (currentPlayer === 1) ? 0 : 1
         }
     }
