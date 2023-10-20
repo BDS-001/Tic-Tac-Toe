@@ -8,6 +8,13 @@
     <script src="./tic_tac_toe.js" defer></script>
 </head>
 <body>
+    <div class="header container">
+        <h1>TIC-TAC-TOE</h1>
+    </div>
+    <div class="players">
+        <div class="player1"></div>
+        <div class="player2"></div>
+    </div>
     <div class="container">
         <div id="gameboard">
             <!-- .game-square[data-index='$@0']*9 -->
@@ -21,6 +28,11 @@
             <div class="game-square" data-index="7"></div>
             <div class="game-square" data-index="8"></div>
         </div>
+    </div>
+
+    <div class="controls container">
+        <button class="start">START</button>
+        <button class="reset">RESET</button>
     </div>
 </body>
 </html>

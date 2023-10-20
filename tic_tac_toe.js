@@ -38,19 +38,25 @@ const gameBoard = (function() {
 
     const checkTie = function() {
         for (let index = 0; index < board.length; index++) {
-            if (board[index] != '') return false
+            if (board[index] === '') return false
         }
         return true
     }
 
-    return {board, changeBoard, checkVictory, checkTie}
+    const reset = function() {
+        board = ['','','','','','','','','']
+    }
+
+    return {board, changeBoard, checkVictory, checkTie, reset}
 })();
 
 //create player factory
 function createPlayer(name, gamePiece) {
 
+    let score = 0
+
     return {
-        name, gamePiece
+        name, gamePiece, score
     }
 }
 
@@ -80,13 +86,16 @@ const game = (function () {
         if (event.target.innerHTML === '') {
             gameBoard.changeBoard(event.target.dataset.index, players[currentPlayer].gamePiece)
             _render()
-            console.log(gameBoard.checkVictory(players[currentPlayer].gamePiece))
+            if (gameBoard.checkVictory(players[currentPlayer].gamePiece)) {
+                players[currentPlayer].score++
+                console.log(`${players[currentPlayer].name} is the winner!`)
+            } else if (gameBoard.checkTie()) {
+                console.log('Its a tie!')
+            }
+            
+            //change the current player
             currentPlayer = (currentPlayer === 1) ? 0 : 1
         }
-    }
-
-    function gameState() {
-
     }
     
 })();

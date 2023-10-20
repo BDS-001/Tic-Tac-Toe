@@ -1,10 +1,22 @@
 :root {
     --border: 10px solid black;
     --board-size: 400px;
+
+    --purple: #47346a;
+    --blue: #667b9d;
+    --green: #97bfb5;
+    --yellow: #eeedda;
+    --brown: #ccb5a7;
+    --red: #b57e8f;
+    --magenta: #914c89;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: green;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--blue);
 }
 
 #gameboard {
@@ -16,12 +28,52 @@ body {
     border: var(--border);
     height: var(--board-size);
     width: var(--board-size);
+    border-radius: 14px;
 }
 
 .game-square {
-    background-color: pink;
     border: var(--border);
     border-collapse: separate;
-    font-size: 5em;
+    font-size: 6em;
     text-align: center;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background-color: var(--brown);
+}
+
+.controls button {
+    border-radius: 8px;
+    border: 2px solid black;
+    height: 80px;
+    width: 160px;
+    font-size: x-large;
+    font-weight: bolder;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.controls button:active {
+    /* transform: translateY(1px); */
+    transform: scale(99%);
+}
+
+.start {
+    background-color: var(--green);
+}
+
+.reset {
+    background-color: var(--red);
+}
+
+.controls {
+    display: flex;
+    gap: 50px;
+    margin: 50px;
 }
