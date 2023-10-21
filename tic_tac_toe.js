@@ -43,11 +43,13 @@ const gameBoard = (function() {
         return true
     }
 
-    const reset = function() {
-        board = ['','','','','','','','','']
+    const clearBoard = function() {
+        for (let index = 0; index < board.length; index++) {
+            board[index] = ''
+        }
     }
 
-    return {board, changeBoard, checkVictory, checkTie, reset}
+    return {board, changeBoard, checkVictory, checkTie, clearBoard}
 })();
 
 //create player factory
@@ -64,6 +66,7 @@ function createPlayer(name, gamePiece) {
 const game = (function () {
     const players = [createPlayer('one','X'), createPlayer('two','O')]
     let currentPlayer = 0
+    let start = false
     
     //cacheDom
     const boardSections = document.querySelectorAll('.game-square')
@@ -72,6 +75,8 @@ const game = (function () {
     boardSections.forEach(function(boardSection) {
         boardSection.addEventListener('click', placeGamePiece)
     })
+    document.querySelector('.reset').addEventListener('click', _resetGame)
+    document.querySelector('.start').addEventListener('click', _startGame)
 
     _render()
 
@@ -82,8 +87,19 @@ const game = (function () {
         }
     }
 
+    function _resetGame() {
+        players[0].score = 0
+        players[1].score = 0
+        gameBoard.clearBoard()
+        _render()
+    }
+
+    function _startGame() {
+        start = true
+    }
+
     function placeGamePiece(event) {
-        if (event.target.innerHTML === '') {
+        if (event.target.innerHTML === '' && start === true) {
             gameBoard.changeBoard(event.target.dataset.index, players[currentPlayer].gamePiece)
             _render()
             if (gameBoard.checkVictory(players[currentPlayer].gamePiece)) {
