@@ -49,19 +49,22 @@ body {
     background-color: var(--brown);
 }
 
-.controls button {
+button {
     border-radius: 8px;
     border: 2px solid black;
-    height: 80px;
-    width: 160px;
-    font-size: x-large;
     font-weight: bolder;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
+.controls button {
+    height: 80px;
+    width: 160px;
+    font-size: x-large;
+}
+
 .controls button:active {
     /* transform: translateY(1px); */
-    transform: scale(99%);
+    transform: scale(95%);
 }
 
 .start {
@@ -76,4 +79,25 @@ body {
     display: flex;
     gap: 50px;
     margin: 50px;
+}
+
+.change-name {
+    height: 30px;
+}
+
+.player {
+    font-size: 3em;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px;
+}
+
+.victory-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
 }

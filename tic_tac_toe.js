@@ -64,21 +64,29 @@ function createPlayer(name, gamePiece) {
 
 // game module
 const game = (function () {
-    const players = [createPlayer('one','X'), createPlayer('two','O')]
+    const players = [createPlayer('Player 1','X'), createPlayer('Player 2','O')]
     let currentPlayer = 0
     let start = false
     
     //cacheDom
     const boardSections = document.querySelectorAll('.game-square')
+    const player1 = document.querySelector('#player1')
+    const player2 = document.querySelector('#player2')
+    const domPlayers = document.querySelectorAll('.player')
+    const changeNameButtons = document.querySelectorAll('.change-name')
+    const voctoryMessage = document.querySelector('.victory-message')
 
     //bind events
     boardSections.forEach(function(boardSection) {
         boardSection.addEventListener('click', placeGamePiece)
     })
+
+    changeNameButtons.forEach(function(changeNameButton) {
+        changeNameButton.addEventListener('click', changePlayerName)
+    })
+
     document.querySelector('.reset').addEventListener('click', _resetGame)
     document.querySelector('.start').addEventListener('click', _startGame)
-
-    _render()
 
     //render to html
     function _render() {
@@ -95,22 +103,42 @@ const game = (function () {
     }
 
     function _startGame() {
-        start = true
+        if (start === false) {
+            gameBoard.clearBoard()
+            _render()
+            voctoryMessage.innerHTML = ''
+            start = true   
+        }
+    }
+
+    function updatePlayer(currentPlayer) {
+        domPlayers[currentPlayer].innerHTML = `${players[currentPlayer].name}: ${players[currentPlayer].score}`
+    }
+
+    function changePlayerName(event) {
+        //open form
     }
 
     function placeGamePiece(event) {
         if (event.target.innerHTML === '' && start === true) {
             gameBoard.changeBoard(event.target.dataset.index, players[currentPlayer].gamePiece)
             _render()
-            if (gameBoard.checkVictory(players[currentPlayer].gamePiece)) {
-                players[currentPlayer].score++
-                console.log(`${players[currentPlayer].name} is the winner!`)
-            } else if (gameBoard.checkTie()) {
-                console.log('Its a tie!')
-            }
-            
+            checkGameState()
+
             //change the current player
             currentPlayer = (currentPlayer === 1) ? 0 : 1
+        }
+    }
+
+    function checkGameState() {
+        if (gameBoard.checkVictory(players[currentPlayer].gamePiece)) {
+            players[currentPlayer].score++
+            updatePlayer(currentPlayer)
+            voctoryMessage.innerHTML = `${players[currentPlayer].name} is the winner!`
+            start = false
+        } else if (gameBoard.checkTie()) {
+            voctoryMessage.innerHTML = 'Its a tie!'
+            start = false
         }
     }
     

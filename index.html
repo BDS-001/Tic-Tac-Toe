@@ -12,8 +12,14 @@
         <h1>TIC-TAC-TOE</h1>
     </div>
     <div class="players">
-        <div class="player1">Player 1: 0</div>
-        <div class="player2"></div>
+        <div class="player-container">
+            <div id="player1" class="player" data-player="0">Player 1: 0</div>
+            <button class="change-name" data-player="0">change name</button>    
+        </div>
+        <div class="player-container">
+            <div id="player2" class="player" data-player="1">Player 2: 0</div>
+            <button class="change-name" data-player="1">change-name</button>    
+        </div>
     </div>
     <div class="container">
         <div id="gameboard">
@@ -34,5 +40,7 @@
         <button class="start">START</button>
         <button class="reset">RESET</button>
     </div>
+
+    <div class="victory-message"></div>
 </body>
 </html>
