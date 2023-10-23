@@ -76,6 +76,7 @@ const game = (function () {
     const playerNamesForm = document.querySelector('#player-names')
     const selectedNames = document.querySelectorAll('.select-name')
     const gameContainer = document.querySelector('#game-container')
+    const startButton = document.querySelector('.start')
 
     //bind events
     boardSections.forEach(function(boardSection) {
@@ -86,8 +87,8 @@ const game = (function () {
         changeNameButton.addEventListener('click', changePlayerName)
     })
 
+    startButton.addEventListener('click', _startGame)
     document.querySelector('.reset').addEventListener('click', _resetGame)
-    document.querySelector('.start').addEventListener('click', _startGame)
     document.querySelector('#submit-names').addEventListener('click', _setPlayerNames)
 
     //render to html
@@ -109,7 +110,8 @@ const game = (function () {
             gameBoard.clearBoard()
             _render()
             voctoryMessage.innerHTML = ''
-            start = true   
+            start = true
+            startButton.disabled = true   
         }
     }
 
@@ -146,9 +148,11 @@ const game = (function () {
             updatePlayer(currentPlayer)
             voctoryMessage.innerHTML = `${players[currentPlayer].name} is the winner!`
             start = false
+            startButton.disabled = false
         } else if (gameBoard.checkTie()) {
             voctoryMessage.innerHTML = 'Its a tie!'
             start = false
+            startButton.disabled = false
         }
     }
     
