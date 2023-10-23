@@ -70,11 +70,12 @@ const game = (function () {
     
     //cacheDom
     const boardSections = document.querySelectorAll('.game-square')
-    const player1 = document.querySelector('#player1')
-    const player2 = document.querySelector('#player2')
     const domPlayers = document.querySelectorAll('.player')
     const changeNameButtons = document.querySelectorAll('.change-name')
     const voctoryMessage = document.querySelector('.victory-message')
+    const playerNamesForm = document.querySelector('#player-names')
+    const selectedNames = document.querySelectorAll('.select-name')
+    const gameContainer = document.querySelector('#game-container')
 
     //bind events
     boardSections.forEach(function(boardSection) {
@@ -87,6 +88,7 @@ const game = (function () {
 
     document.querySelector('.reset').addEventListener('click', _resetGame)
     document.querySelector('.start').addEventListener('click', _startGame)
+    document.querySelector('#submit-names').addEventListener('click', _setPlayerNames)
 
     //render to html
     function _render() {
@@ -115,8 +117,16 @@ const game = (function () {
         domPlayers[currentPlayer].innerHTML = `${players[currentPlayer].name}: ${players[currentPlayer].score}`
     }
 
-    function changePlayerName(event) {
-        //open form
+    function _setPlayerNames(event) {
+        event.preventDefault();
+        for (let index = 0; index < selectedNames.length; index++) {
+            if (selectedNames[index].value != '') {
+                players[index].name = selectedNames[index].value
+                updatePlayer(index)
+            } 
+        }
+        playerNamesForm.remove()
+        gameContainer.hidden = false
     }
 
     function placeGamePiece(event) {

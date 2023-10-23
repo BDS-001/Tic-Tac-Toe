@@ -62,7 +62,7 @@ button {
     font-size: x-large;
 }
 
-.controls button:active {
+button:active {
     /* transform: translateY(1px); */
     transform: scale(95%);
 }
@@ -100,4 +100,32 @@ button {
     align-items: center;
     justify-content: center;
     font-size: x-large;
+}
+
+#player-names {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    gap: 50px;
+    text-align: center;
+}
+
+.select-player-name-container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.select-player-name-container label {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.select-player-name-container input {
+    font-size: x-large;
+    padding-left: 20px;
+}
+
+#submit-names {
+    font-size: 3em;
+    background-color: var(--green);
 }
