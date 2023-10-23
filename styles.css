@@ -105,9 +105,9 @@ button:active {
 #player-names {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 100px;
     gap: 50px;
-    text-align: center;
 }
 
 .select-player-name-container {
@@ -128,4 +128,5 @@ button:active {
 #submit-names {
     font-size: 3em;
     background-color: var(--green);
+    width: 300px;
 }
